@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.post("/play", (req, res) => {
     if (req.body.text) {
-        exec("python3 ./main.py " + req.body.text, (err, stdout, stderr) => {
+        exec("python3 ./main.py " + (req.body.text.replace(/[\\$'"]/g, "\\$&")), (err, stdout, stderr) => {
             if (err) {
                 console.log(err)
                 res.json({
